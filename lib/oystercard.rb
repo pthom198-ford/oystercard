@@ -33,7 +33,7 @@ class Oystercard
     @entry_station = nil
   end
 
-  def in_journey
+  def in_journey?
     !entry_station.nil?
   end
 

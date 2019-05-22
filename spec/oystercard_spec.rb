@@ -27,18 +27,18 @@ let(:station_exit_double) { double('station exit double', station_name: "Euston"
   end
 
   it 'can initialize card journey status as false' do
-    expect(card.in_journey).to eql (false)
+    expect(card.in_journey?).to eql (false)
   end
 
   it 'can touch in and start journey' do
     card.top_up(Oystercard::MINIMUM_BALANCE)
     card.touch_in(station_double)
-    expect(card.in_journey).to eql(true)
+    expect(card.in_journey?).to eql(true)
   end
 
   it 'can touch out and end journey' do
     card.touch_out(station_exit_double)
-    expect(card.in_journey).to eql(false)
+    expect(card.in_journey?).to eql(false)
   end
 
   it 'will raise an error if card touches in with less than minimum fare' do
