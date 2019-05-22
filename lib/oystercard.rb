@@ -3,14 +3,13 @@
 
 class Oystercard
   attr_accessor :balance
-  attr_reader :in_journey, :entry_station, :journeys
+  attr_reader :entry_station, :journeys
   BALANCE_LIMIT = 90
   MINIMUM_BALANCE = 1
   MINIMUM_FARE = 1
 
-  def initialize(balance = 0, in_journey = false)
+  def initialize(balance = 0)
     @balance = balance
-    @in_journey = in_journey
     @entry_station = nil
     @journeys = []
   end
@@ -29,10 +28,13 @@ class Oystercard
   end
 
   def touch_out(exit_station)
-    @in_journey = false
     deduct(MINIMUM_FARE)
     journeys.push({:entry => @entry_station, :exit => exit_station})
     @entry_station = nil
+  end
+
+  def in_journey
+    !entry_station.nil?
   end
 
   private
@@ -44,5 +46,4 @@ class Oystercard
   def deduct(amount)
     self.balance -= amount
   end
-
 end
